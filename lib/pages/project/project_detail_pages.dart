@@ -10,7 +10,7 @@ var title = const TextStyle(
 );
 var receiveAmountStyle = const TextStyle(
   fontSize: 15.0,
-  color: Colors.orange,
+  color: Colors.pink,
   overflow: TextOverflow.ellipsis,
 );
 var descriptionStyle = const TextStyle(
@@ -32,10 +32,8 @@ class ProjectDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var formatter = NumberFormat('#,###,000');
-    var amount = formatter.format(project.recieveAmount);
-    var target = formatter.format(project.targetAmount);
-    var percentText = ((project.recieveAmount /project.targetAmount)*100).toStringAsFixed(0);
-    var percent = int.tryParse(percentText);
+    var target = formatter.format(project.PeopleLike);
+
     return Scaffold(
       appBar: AppBar(
           title: Text(
@@ -56,82 +54,31 @@ class ProjectDetailsPage extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 const SizedBox(height: 10.0),
-                Text(project.description),
+                Text('Artist:  ${project.description}'),
                 const SizedBox(height: 10.0),
-                Text('ระยะเวลาโครงการ ${project.projectDuration}'),
+                Text('Release Date:  ${project.releaseDate}'),
                 const SizedBox(height: 10.0),
-                Text('พื้นที่ดำเนินโครงการ ${project.projectArea}'),
+                Text('Company:  ${project.company}'),
+                const SizedBox(height: 10.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 0.0, right: 0.0),
+                  child: Text('ยอดกดถูกใจ'),
+                ),
                 const SizedBox(height: 10.0),
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: Text('ยอดบริจาคขณะนี้'),
+                  child: Text('❤ $target',style: receiveAmountStyle),
                 ),
                 const SizedBox(height: 10.0),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: Text(' $amount บาท',style: receiveAmountStyle),
-                ),
-                const SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('เป้าหมาย', style: descriptionStyle),
-                          const SizedBox(height: 5.0),
-                          Text('$target บาท', style: amountStyle),
-                        ],
-                      ),
-                    ),
-                    Text('$percentText%', style: descriptionStyle),
-                  ],
-                ),
+
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Row(
                     children: [
-                      Expanded(
-                        flex: percent!,
-                        child: Container(
-                          height: 10.0,
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 5.0, horizontal: 0.0),
-                          color: Colors.orange,
-                        ),
-                      ),
-                      Expanded(
-                        flex: 100-percent,
-                        child: Container(
-                          height: 10.0,
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 5.0, horizontal: 0.0),
-                          color: const Color(0xFFE8E8E8), //Colors.grey[200],
-                        ),
-                      ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text('${project.duration} วัน', style: descriptionStyle),
-                      Row(
-                        children: [
-                          const Icon(Icons.person, size: 14.0),
-                          Text('${project.donateCount}',
-                              style: descriptionStyle),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+
                 SizedBox(height: 20.0),
                 Row(
                   children: [
@@ -140,29 +87,17 @@ class ProjectDetailsPage extends StatelessWidget {
                         onPressed: () {
                           //todo:
                         },
-                        child: Text('💛 ร่วมบริจาค'),
+                        child: Text('❤ ฉันชอบเพลงนี้'),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 10.0),
-                Row(
-                  children: [
-                    Expanded(flex :1,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          //todo:
-                        },
-                        child: Text('🛒 หยิบใส่ตะกร้า'),
-                      ),
-                    ),
-                  ],
-                ),
+
                 SizedBox(height: 30.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Text('แชร์ให้เพื่อน',),
+                    Text('Share',),
                     //Icon(Icons.shopping_cart_outlined),
                   ],
                 ),
